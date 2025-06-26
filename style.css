@@ -23,7 +23,7 @@ body {
 }
 
 .form-container {
-    margin: 40px;
+    margin: 20px;
     z-index: 2;
     max-width: 400px;
     padding: 30px;
@@ -34,6 +34,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: transform 0.3s ease-in-out;
 }
 
 @media (max-width: 600px) {
@@ -45,14 +46,36 @@ body {
 
 .form-tabs {
     position: relative;
-    display: flex;
-    flex-direction: row;
     margin-bottom: 30px;
     border-bottom: 2px solid #e9ecef;
 }
 
-.tab-btn {
+.tab-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tab-list li {
     flex: 1;
+}
+
+.tab-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 50%;
+    background: #007bff;
+    border-radius: 2px 2px 0 0;
+    transition: left 0.3s ease, width 0.3s ease;
+    z-index: 1;
+    will-change: left, width;
+}
+
+.tab-btn {
+    width: 100%;
     padding: 15px;
     background: none;
     border: none;
@@ -61,11 +84,6 @@ body {
     color: #666;
     transition: color 0.3s, background-color 0.3s, border-bottom-color 0.3s;
     border-bottom: 3px solid transparent;
-}
-
-.tab-btn:hover {
-    color: #007bff;
-    background-color: #f8f9fa;
 }
 
 .tab-btn.active {
@@ -474,7 +492,7 @@ body.forgot-active .sun {
     justify-content: center;
     min-height: 100vh;
     width: 100vw;
-    gap: 5vw;
+    gap: 1vw;
 }
 
 .left-banner {
@@ -484,6 +502,7 @@ body.forgot-active .sun {
     height: 100%;
     max-width: 30vw;
     flex-shrink: 0;
+    transition: transform 0.3s ease-in-out;
 }
 
 .join-war-text {
@@ -493,24 +512,10 @@ body.forgot-active .sun {
     text-shadow: 0 4px 32px rgba(0,0,0,0.7), 0 1px 0 #333;
     letter-spacing: 0.1em;
     line-height: 1.1;
-    text-align: center;
+    text-align: right;
     user-select: none;
     display: block;
     width: 100%;
-}
-
-.form-container {
-    margin: 40px;
-    z-index: 2;
-    max-width: 400px;
-    padding: 30px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 @media (max-width: 900px) {

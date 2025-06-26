@@ -1,10 +1,19 @@
+// State variables for layout management
+let currentLayout = 'login'; // 'login' or 'register'
+let isAnimating = false;
+
 // Function to switch between login and register forms, and show forgot password
 function showForm(formType) {
+    if (isAnimating) return; // Prevent multiple animations
+    
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
     const forgotForm = document.getElementById('forgotForm');
-    const loginTab = document.querySelector('.tab-btn:nth-child(1)');
-    const registerTab = document.querySelector('.tab-btn:nth-child(2)');
+    const loginTab = document.querySelector('.tab-list li:first-child .tab-btn');
+    const registerTab = document.querySelector('.tab-list li:last-child .tab-btn');
+    const warText = document.getElementById('warText');
+    const leftBanner = document.querySelector('.left-banner');
+    const formContainer = document.querySelector('.form-container');
     
     // Hide all forms
     loginForm.classList.remove('active');
@@ -15,10 +24,24 @@ function showForm(formType) {
         loginForm.classList.add('active');
         loginTab.classList.add('active');
         registerTab.classList.remove('active');
+        // Change text to "JOIN THE WAR"
+        warText.innerHTML = 'JOIN<br>THE<br>WAR';
+        
+        // Animate to login layout (text left, container right)
+        if (currentLayout !== 'login') {
+            animateLayout('login', leftBanner, formContainer);
+        }
     } else if (formType === 'register') {
         registerForm.classList.add('active');
         registerTab.classList.add('active');
         loginTab.classList.remove('active');
+        // Change text to "ENLIST HERE NOW"
+        warText.innerHTML = 'ENLIST<br>HERE<br>NOW';
+        
+        // Animate to register layout (container left, text right)
+        if (currentLayout !== 'register') {
+            animateLayout('register', leftBanner, formContainer);
+        }
     } else if (formType === 'forgot') {
         forgotForm.classList.add('active');
         // Hide tabs when showing forgot password form
@@ -27,8 +50,34 @@ function showForm(formType) {
     }
 }
 
+function animateLayout(newLayout, leftBanner, formContainer) {
+    isAnimating = true;
+    const warText = document.getElementById('warText');
+    
+    if (newLayout === 'login') {
+        // Animate to login layout: text left, container right
+        leftBanner.style.transform = 'translateX(0)';
+        formContainer.style.transform = 'translateX(0)';
+        // Right align text for login (JOIN THE WAR)
+        warText.style.textAlign = 'right';
+    } else if (newLayout === 'register') {
+        // Animate to register layout: container left, text right
+        leftBanner.style.transform = 'translateX(100%)';
+        formContainer.style.transform = 'translateX(-150%)';
+        // Left align text for register (ENLIST HERE NOW)
+        warText.style.textAlign = 'left';
+    }
+    
+    // Update state after animation
+    setTimeout(() => {
+        currentLayout = newLayout;
+        isAnimating = false;
+    }, 300);
+}
+
 window.addEventListener('DOMContentLoaded', function() {
-    // No need to call moveTabIndicator here
+    // Initialize layout state
+    currentLayout = 'login';
 });
 
 // Handle login form submission

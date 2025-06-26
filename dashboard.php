@@ -221,15 +221,35 @@ $email = $user['email'];
                 padding: 12px 0;
             }
         }
+
+        /* Black fade-in overlay */
+        .fade-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .fade-overlay.fade-out {
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
+    <!-- Black fade-in overlay -->
+    <div class="fade-overlay" id="fadeOverlay"></div>
+    
     <video autoplay muted loop id="bgVideo">
         <source src="assets/darius.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <div class="container">
-        <div class="dashboard-container">
+        <div class="dashboard-container" id="dashboardContent">
             <div class="line"></div>
             <div class="welcome-header">
                 <h1>Welcome Back!</h1>
@@ -240,5 +260,22 @@ $email = $user['email'];
             <div class="line"></div>
         </div>
     </div>
+
+    <script>
+        // Fade-in effect when dashboard loads
+        window.addEventListener('load', function() {
+            const overlay = document.getElementById('fadeOverlay');
+            
+            // After a brief delay, fade out the black overlay
+            setTimeout(() => {
+                overlay.classList.add('fade-out');
+                
+                // Remove overlay after fade completes
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 1000);
+            }, 500);
+        });
+    </script>
 </body>
 </html> 

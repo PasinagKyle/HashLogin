@@ -40,13 +40,15 @@
     </video>
     <div class="main-flex-container">
         <div class="left-banner">
-            <span class="join-war-text">JOIN<br>THE<br>WAR</span>
+            <span class="join-war-text" id="warText">ENLIST<br>HERE<br>NOW</span>
         </div>
         <div class="form-container">
-            <div class="form-tabs">
-                <button class="tab-btn active" onclick="showForm('login')" id="loginTab">Login</button>
-                <button class="tab-btn" onclick="showForm('register')" id="registerTab">Register</button>
-            </div>
+            <nav class="form-tabs">
+                <ul class="tab-list">
+                    <li><button class="tab-btn active" onclick="showForm('login')" id="loginTab">Login</button></li>
+                    <li><button class="tab-btn" onclick="showForm('register')" id="registerTab">Register</button></li>
+                </ul>
+            </nav>
             
             <!-- Login Form -->
             <form id="loginForm" class="form active" action="login.php" method="POST">
